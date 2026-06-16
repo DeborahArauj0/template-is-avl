@@ -4,7 +4,7 @@
 * Email (@ccc): 
 * Matrícula: 
 
-# Roteiro: BST
+# Roteiro: IsAvl
 
 ## A tarefa.
 
