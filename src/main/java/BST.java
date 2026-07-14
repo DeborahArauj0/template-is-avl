@@ -16,9 +16,7 @@ public class BST {
 
         if (node == null) return true;
 
-        int balance = balance(node);
-        
-        if (balance < -1 || balance > 1) return false;
+        if (balance(node) > 1) return false;
 
         return isAVL(node.left) && isAVL(node.right);
 
