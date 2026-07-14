@@ -50,6 +50,22 @@ public class BST {
         return Math.abs(height(node.left) - height(node.right));
     }
 
+    //conta nós desbalanceados 
+    public int contUnBalanced(){
+        return contUnBalanced(this.root);
+    }
+
+    private int contUnBalanced(Node node){
+
+        if (node == null) return 0;
+
+        int cout = 0;
+
+        if (balance(node) > 1) return 1;
+
+        return cout + contUnBalanced(node.left) + contUnBalanced(node.right);
+    }
+
     /**
      * Busca o nó cujo valor é igual ao passado como parâmetro. Essa é a implementação 
      * iterativa clássica da busca binária em uma árvore binária de pesquisa.
