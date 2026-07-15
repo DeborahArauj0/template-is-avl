@@ -59,11 +59,37 @@ public class BST {
 
         if (node == null) return 0;
 
-        int cout = 0;
+        int count = 0;
 
-        if (balance(node) > 1) return 1;
+        if (balance(node) > 1) count++;
 
-        return cout + contUnBalanced(node.left) + contUnBalanced(node.right);
+        return count + contUnBalanced(node.left) + contUnBalanced(node.right);
+    }
+
+    //IMPLEMENTAR 
+    public Node firstUnBalanced(){
+        return firstUnBalanced(this.root);
+    }
+
+    private Node firstUnBalanced(Node node){
+        
+        if (node == null) return null;
+
+        if (balance(node) > 1) return node;
+
+        Node left = firstUnBalanced(node.left);
+
+        if(left != null) return left;
+
+        return firstUnBalanced(node.right);
+    }
+
+    //IMPLEMENTAR
+    public String testRotationNeeded(Node node){
+
+        //if -2 == if -2 == if -
+        //if balance do filho for ..
+        return "";
     }
 
     /**
