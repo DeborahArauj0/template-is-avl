@@ -92,6 +92,22 @@ public class BST {
         return "";
     }
 
+    //IMPLEMENTAR
+    public boolean checkDesbalanced(){
+        return false;
+    }
+
+    //IMPLEMENTAR 
+    public boolean isRightPeding(){
+        return false;
+    }
+
+    //IMPLEMENTAR
+    public boolean isLeftPeding(){
+        return false;
+    }
+
+    
     /**
      * Busca o nó cujo valor é igual ao passado como parâmetro. Essa é a implementação 
      * iterativa clássica da busca binária em uma árvore binária de pesquisa.
@@ -348,8 +364,6 @@ public class BST {
         }
             
     }
-
-    
     
     /**
      * Busca o nó cujo valor é igual ao passado como parâmetro. Essa é a implementação 
