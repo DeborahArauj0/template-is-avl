@@ -74,7 +74,7 @@ public class BST {
     private Node firstUnBalanced(Node node){
         
         if (node == null) return null;
-
+        //balance trata casos negativos
         if (balance(node) > 1) return node;
 
         Node left = firstUnBalanced(node.left);
@@ -87,8 +87,6 @@ public class BST {
     //IMPLEMENTAR
     public String testRotationNeeded(Node node){
 
-        //if -2 == if -2 == if -
-        //if balance do filho for ..
         return "";
     }
 
@@ -107,7 +105,7 @@ public class BST {
         return false;
     }
 
-    
+
     /**
      * Busca o nó cujo valor é igual ao passado como parâmetro. Essa é a implementação 
      * iterativa clássica da busca binária em uma árvore binária de pesquisa.

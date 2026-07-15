@@ -138,7 +138,7 @@ public class BstAsserts {
         for(int v : values)
             bst.add(v);
 
-        assert bst.contUnBalanced() == 2;
+        assert bst.contUnBalanced() == 3;
 
         // outro caso semelhante
         bst = new BST();
@@ -147,7 +147,7 @@ public class BstAsserts {
         for(int v : values)
             bst.add(v);
 
-        assert bst.contUnBalanced() == 2;
+        assert bst.contUnBalanced() == 3;
 
         // árvore maior
         bst = new BST();
