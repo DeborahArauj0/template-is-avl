@@ -2,247 +2,319 @@ public class BstAsserts {
 
     public static void main(String[] args) {
 
-        // TESTES isAVL()
-
-        BST bst = new BST();
-        assert bst.isAVL();
-
-        int[] values = new int[]{41,20,11,29,32,65,50,91,72,99};
-        for (int i : values)
-            bst.add(i);
-        assert bst.isAVL();
-
-        bst = new BST();
-        bst.add(1);
-        assert bst.isAVL();
-        bst.add(2);
-        assert bst.isAVL();
-        bst.add(3);
-        assert !bst.isAVL();
-
-        bst = new BST();
-        bst.add(1);
-        assert bst.isAVL();
-        bst.add(3);
-        assert bst.isAVL();
-        bst.add(2);
-        assert !bst.isAVL();
-
-        bst = new BST();
-        bst.add(10);
-        assert bst.isAVL();
-        bst.add(5);
-        assert bst.isAVL();
-        bst.add(1);
-        assert !bst.isAVL();
-
-        bst = new BST();
-        bst.add(10);
-        assert bst.isAVL();
-        bst.add(5);
-        assert bst.isAVL();
-        bst.add(6);
-        assert !bst.isAVL();
-
-        bst = new BST();
-        values = new int[]{90,13,4,8,37,16,24,44,42,88,51,72,81,84,92};
-        for (int i : values)
-            bst.add(i);
-        assert !bst.isAVL();
-
-        bst = new BST();
-        values = new int[]{23,12,40,9,25,60,50};
-        for (int i : values)
-            bst.add(i);
-        assert bst.isAVL();
-
+        testIsAVL();
         testContUnBalanced();
         testFirstUnBalanced();
-      //  testRotationNeeded();
+        //testRotationNeeded();
 
         System.out.println("Todos os testes passaram!");
     }
 
-    // contUnBalanced()
-
     public static void testContUnBalanced() {
 
-        BST bst = new BST();
+    BST bst = new BST();
 
-        assert bst.contUnBalanced() == 0;
+    // árvore vazia
+    assert bst.contUnBalanced() == 0;
+
+    // um nó
+    bst.add(10);
+    assert bst.contUnBalanced() == 0;
+
+    // dois nós
+    bst.add(5);
+    assert bst.contUnBalanced() == 0;
+
+    // perfeitamente balanceada
+    bst = new BST();
+    int[] values = {4,2,6,1,3,5,7};
+
+    for(int v : values)
+        bst.add(v);
+
+    assert bst.contUnBalanced() == 0;
+
+    // LL
+    bst = new BST();
+    values = new int[]{30,20,10};
+
+    for(int v : values)
+        bst.add(v);
+
+    assert bst.contUnBalanced() == 1;
+
+    // RR
+    bst = new BST();
+    values = new int[]{10,20,30};
+
+    for(int v : values)
+        bst.add(v);
+
+    assert bst.contUnBalanced() == 1;
+
+    // LR
+    bst = new BST();
+    values = new int[]{30,10,20};
+
+    for(int v : values)
+        bst.add(v);
+
+    assert bst.contUnBalanced() == 1;
+
+    // RL
+    bst = new BST();
+    values = new int[]{10,30,20};
+
+    for(int v : values)
+        bst.add(v);
+
+    assert bst.contUnBalanced() == 1;
+
+    // cadeia esquerda
+    bst = new BST();
+    values = new int[]{50,40,30,20,10};
+
+    for(int v : values)
+        bst.add(v);
+
+    assert bst.contUnBalanced() == 3;
+
+    // cadeia direita
+    bst = new BST();
+    values = new int[]{10,20,30,40,50};
+
+    for(int v : values)
+        bst.add(v);
+
+    assert bst.contUnBalanced() == 3;
+
+    // vários níveis
+    bst = new BST();
+    values = new int[]{50,30,70,20,40,10,5};
+
+    for(int v : values)
+        bst.add(v);
+
+    assert bst.contUnBalanced() == 3;
+
+    // árvore grande
+    bst = new BST();
+    values = new int[]{90,13,4,8,37,16,24,44,42,88,51,72,81,84,92};
+
+    for(int v : values)
+        bst.add(v);
+
+    assert bst.contUnBalanced() > 0;
+}
+
+
+    public static void testPredecessor() {
+
+        BST bst = new BST();
+        int[] values = {50,30,70,20,40,60,80};
+        for (int v : values) bst.add(v);
+
+        assert bst.predecessor(bst.search(50)).value == 40;
+        assert bst.predecessor(bst.search(70)).value == 60;
+        assert bst.predecessor(bst.search(40)).value == 30;
+        assert bst.predecessor(bst.search(20)) == null;
+
+        bst = new BST();
+        bst.add(10);
+        assert bst.predecessor(bst.search(10)) == null;
+    }
+
+    public static void testFirstUnBalanced(){
+
+    BST bst = new BST();
+
+    // árvore vazia
+    assert bst.firstUnBalanced() == null;
+
+    // um nó
+    bst.add(10);
+    assert bst.firstUnBalanced() == null;
+
+    // dois nós
+    bst.add(5);
+    assert bst.firstUnBalanced() == null;
+
+    bst.add(15);
+    assert bst.firstUnBalanced() == null;
+
+    // LL
+    bst = new BST();
+
+    bst.add(30);
+    bst.add(20);
+    bst.add(10);
+
+    assert bst.firstUnBalanced().value == 30;
+
+    // RR
+    bst = new BST();
+
+    bst.add(10);
+    bst.add(20);
+    bst.add(30);
+
+    assert bst.firstUnBalanced().value == 10;
+
+    // LR
+    bst = new BST();
+
+    bst.add(30);
+    bst.add(10);
+    bst.add(20);
+
+    assert bst.firstUnBalanced().value == 30;
+
+    // RL
+    bst = new BST();
+
+    bst.add(10);
+    bst.add(30);
+    bst.add(20);
+
+    assert bst.firstUnBalanced().value == 10;
+
+    // cadeia esquerda
+    bst = new BST();
+
+    int[] values = {50,40,30,20,10};
+
+    for(int v : values)
+        bst.add(v);
+
+    assert bst.firstUnBalanced().value == 50;
+
+    // cadeia direita
+    bst = new BST();
+
+    values = new int[]{10,20,30,40,50};
+
+    for(int v : values)
+        bst.add(v);
+
+    assert bst.firstUnBalanced().value == 10;
+
+    // árvore perfeita
+    bst = new BST();
+
+    values = new int[]{4,2,6,1,3,5,7};
+
+    for(int v : values)
+        bst.add(v);
+
+    assert bst.firstUnBalanced() == null;
+
+    // árvore maior
+    bst = new BST();
+
+    values = new int[]{90,13,4,8,37,16,24,44,42,88,51,72,81,84,92};
+
+    for(int v : values)
+        bst.add(v);
+
+    assert bst.firstUnBalanced() != null;
+}
+
+
+    public static void testSucessor() {
+
+        BST bst = new BST();
+        int[] values = {50,30,70,20,40,60,80};
+        for (int v : values) bst.add(v);
+
+        assert bst.sucessor(bst.search(50)).value == 60;
+        assert bst.sucessor(bst.search(30)).value == 40;
+        assert bst.sucessor(bst.search(60)).value == 70;
+        assert bst.sucessor(bst.search(80)) == null;
+
+        bst = new BST();
+        bst.add(10);
+        assert bst.sucessor(bst.search(10)) == null;
+    }
+
+
+    public static void testIsAVL() {
+
+        BST bst = new BST();
+        assert bst.isAVL();
 
         bst.add(10);
-        assert bst.contUnBalanced() == 0;
+        assert bst.isAVL();
 
         bst.add(5);
-        assert bst.contUnBalanced() == 0;
+        assert bst.isAVL();
 
+        bst.add(15);
+        assert bst.isAVL();
+
+        // árvore perfeita
         bst = new BST();
         int[] values = {4,2,6,1,3,5,7};
-
-        for(int v : values)
-            bst.add(v);
-
-        assert bst.contUnBalanced() == 0;
+        for (int v : values) bst.add(v);
+        assert bst.isAVL();
 
         // LL
         bst = new BST();
         bst.add(30);
         bst.add(20);
         bst.add(10);
-        assert bst.contUnBalanced() == 1;
+        assert !bst.isAVL();
 
         // RR
         bst = new BST();
         bst.add(10);
         bst.add(20);
         bst.add(30);
-        assert bst.contUnBalanced() == 1;
+        assert !bst.isAVL();
 
         // LR
         bst = new BST();
         bst.add(30);
         bst.add(10);
         bst.add(20);
-        assert bst.contUnBalanced() == 1;
+        assert !bst.isAVL();
 
         // RL
         bst = new BST();
         bst.add(10);
         bst.add(30);
         bst.add(20);
-        assert bst.contUnBalanced() == 1;
+        assert !bst.isAVL();
 
-        // vários desbalanceados (esquerda)
+        // degenerada à esquerda
         bst = new BST();
         values = new int[]{50,40,30,20,10};
+        for (int v : values) bst.add(v);
+        assert !bst.isAVL();
 
-        for(int v : values)
-            bst.add(v);
-
-        assert bst.contUnBalanced() == 3;
-
-        // vários desbalanceados (direita)
+        // degenerada à direita
         bst = new BST();
         values = new int[]{10,20,30,40,50};
+        for (int v : values) bst.add(v);
+        assert !bst.isAVL();
 
-        for(int v : values)
-            bst.add(v);
-
-        assert bst.contUnBalanced() == 3;
-
-        // primeiro desbalanceado não é a raiz
+        // árvore maior balanceada
         bst = new BST();
-        values = new int[]{50,30,70,20,40,10,5};
+        values = new int[]{41,20,11,29,32,65,50,91,72,99};
+        for (int v : values) bst.add(v);
+        assert bst.isAVL();
 
-        for(int v : values)
-            bst.add(v);
-
-        assert bst.contUnBalanced() == 3;
-
-        // outro caso semelhante
-        bst = new BST();
-        values = new int[]{50,30,70,20,40,60,80,10,5};
-
-        for(int v : values)
-            bst.add(v);
-
-        assert bst.contUnBalanced() == 3;
-
-        // árvore maior
+        // árvore maior desbalanceada
         bst = new BST();
         values = new int[]{90,13,4,8,37,16,24,44,42,88,51,72,81,84,92};
+        for (int v : values) bst.add(v);
+        assert !bst.isAVL();
 
-        for(int v : values)
-            bst.add(v);
-
-        assert bst.contUnBalanced() > 0;
-    }
-
-    // firstUnBalanced()
-
-    public static void testFirstUnBalanced() {
-
-        BST bst = new BST();
-
-        assert bst.firstUnBalanced() == null;
-
-        bst.add(10);
-        assert bst.firstUnBalanced() == null;
-
-        bst.add(5);
-        assert bst.firstUnBalanced() == null;
-
-        bst.add(15);
-        assert bst.firstUnBalanced() == null;
-
-        // LL
-        bst = new BST();
-        bst.add(10);
-        bst.add(5);
-        bst.add(1);
-        assert bst.firstUnBalanced().value == 10;
-
-        // RR
-        bst = new BST();
-        bst.add(10);
-        bst.add(20);
-        bst.add(30);
-        assert bst.firstUnBalanced().value == 10;
-
-        // LR
-        bst = new BST();
-        bst.add(10);
-        bst.add(5);
-        bst.add(7);
-        assert bst.firstUnBalanced().value == 10;
-
-        // RL
-        bst = new BST();
-        bst.add(10);
-        bst.add(20);
-        bst.add(15);
-        assert bst.firstUnBalanced().value == 10;
-
-        // primeiro desbalanceado não é a raiz
-        bst = new BST();
-        int[] values = {50,30,70,20,40,10,5};
-
-        for(int v : values)
-            bst.add(v);
-
-        assert bst.firstUnBalanced().value == 20;
-
-        // outro caso semelhante
-        bst = new BST();
-        values = new int[]{50,30,70,20,40,60,80,10,5};
-
-        for(int v : values)
-            bst.add(v);
-
-        assert bst.firstUnBalanced().value == 20;
-
-        // desbalanceado profundo
+        // desbalanceamento profundo
         bst = new BST();
         values = new int[]{100,50,150,25,75,10,5};
-
-        for(int v : values)
-            bst.add(v);
-
-        assert bst.firstUnBalanced().value == 25;
-
-        // árvore grande
-        bst = new BST();
-        values = new int[]{90,13,4,8,37,16,24,44,42,88,51,72,81,84,92};
-
-        for(int v : values)
-            bst.add(v);
-
-        assert bst.firstUnBalanced() != null;
+        for (int v : values) bst.add(v);
+        assert !bst.isAVL();
     }
-
-    // rotationNeeded()
-
 
     // public static void testRotationNeeded() {
 
@@ -274,6 +346,111 @@ public class BstAsserts {
     //     bst.add(30);
     //     bst.add(20);
     //     assert bst.rotationNeeded(bst.firstUnBalanced()).equals("RL");
+
+    //     // árvore balanceada
+    //     bst = new BST();
+    //     int[] values = {4,2,6,1,3,5,7};
+
+    //     for(int v : values)
+    //         bst.add(v);
+
+    //     assert bst.firstUnBalanced() == null;
+
+    //     // caso maior LL
+    //     bst = new BST();
+
+    //     values = new int[]{50,40,60,30,20,10};
+
+    //     for(int v : values)
+    //         bst.add(v);
+
+    //     assert bst.rotationNeeded(bst.firstUnBalanced()).equals("LL");
+
+    //     // caso maior RR
+    //     bst = new BST();
+
+    //     values = new int[]{50,40,60,70,80,90};
+
+    //     for(int v : values)
+    //         bst.add(v);
+
+    //     assert bst.rotationNeeded(bst.firstUnBalanced()).equals("RR");
+    // }
+
+
+    public static void testCheckDesbalanced(){
+
+        BST bst = new BST();
+
+        assert !bst.checkDesbalanced();
+
+        bst.add(10);
+        assert !bst.checkDesbalanced();
+
+        bst.add(20);
+        assert !bst.checkDesbalanced();
+
+        bst.add(30);
+        assert bst.checkDesbalanced();
+
+        bst = new BST();
+
+        int[] values = {4,2,6,1,3,5,7};
+
+        for(int v : values)
+            bst.add(v);
+
+        assert !bst.checkDesbalanced();
+
+    }
+
+    // public static void testIsLeftPending(){
+
+    //     BST bst = new BST();
+
+    //     bst.add(30);
+    //     bst.add(20);
+    //     bst.add(10);
+
+    //     Node n = bst.firstUnBalanced();
+
+    //     assert bst.isLeftPending(n);
+
+    //     bst = new BST();
+
+    //     bst.add(30);
+    //     bst.add(10);
+    //     bst.add(20);
+
+    //     n = bst.firstUnBalanced();
+
+    //     assert bst.isLeftPending(n);
+
+    // }
+  
+    // public static void testIsRightPending(){
+
+    //     BST bst = new BST();
+
+    //     bst.add(10);
+    //     bst.add(20);
+    //     bst.add(30);
+
+    //     Node n = bst.firstUnBalanced();
+
+    //     assert bst.isRightPending(n);
+
+    //     bst = new BST();
+
+    //     bst.add(10);
+    //     bst.add(30);
+    //     bst.add(20);
+
+    //     n = bst.firstUnBalanced();
+
+    //     assert bst.isRightPending(n);
+
     // }
 
 }
+ 

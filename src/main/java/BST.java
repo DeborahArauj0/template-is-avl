@@ -47,7 +47,7 @@ public class BST {
 
     private int balance(Node node) {
 
-        return Math.abs(height(node.left) - height(node.right));
+        return height(node.left) - height(node.right);
     }
 
     //conta nós desbalanceados 
@@ -75,7 +75,9 @@ public class BST {
         
         if (node == null) return null;
         //balance trata casos negativos
-        if (balance(node) > 1) return node;
+        int balance =  Math.abs(balance(node));
+
+        if (balance > 1) return node;
 
         Node left = firstUnBalanced(node.left);
 
@@ -103,6 +105,15 @@ public class BST {
     //IMPLEMENTAR
     public boolean isLeftPeding(){
         return false;
+        if (balace > );
+    }
+
+    private boolean isLeftPeding(Node node){
+
+        return balance(node) > 0;
+
+        Node re
+        return isLeftPeding(node.right) && isLeftPeding(node.left);
     }
 
 
@@ -468,7 +479,6 @@ public class BST {
     }
     
 }
-
 
 class Node {
     
