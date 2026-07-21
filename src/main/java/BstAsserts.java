@@ -5,6 +5,8 @@ public class BstAsserts {
         testIsAVL();
         testContUnBalanced();
         testFirstUnBalanced();
+        testIsLeftPending();
+        testIsRightPending();
         //testRotationNeeded();
 
         System.out.println("Todos os testes passaram!");
@@ -404,53 +406,55 @@ public class BstAsserts {
 
     }
 
-    // public static void testIsLeftPending(){
+    public static void testIsLeftPending(){
 
-    //     BST bst = new BST();
+        BST bst = new BST();
 
-    //     bst.add(30);
-    //     bst.add(20);
-    //     bst.add(10);
+        bst.add(30);
+        bst.add(20);
+        bst.add(10);
 
-    //     Node n = bst.firstUnBalanced();
+        Node n = bst.firstUnBalanced();
 
-    //     assert bst.isLeftPending(n);
+        assert bst.isLeftPending(n);
 
-    //     bst = new BST();
+        bst = new BST();
 
-    //     bst.add(30);
-    //     bst.add(10);
-    //     bst.add(20);
+        bst.add(30);
+        bst.add(10);
+        bst.add(20);
 
-    //     n = bst.firstUnBalanced();
+        n = bst.firstUnBalanced();
 
-    //     assert bst.isLeftPending(n);
+        assert !bst.isRightPending(n);
+        assert bst.isLeftPending(n);
 
-    // }
+    }
   
-    // public static void testIsRightPending(){
+    public static void testIsRightPending(){
 
-    //     BST bst = new BST();
+        BST bst = new BST();
 
-    //     bst.add(10);
-    //     bst.add(20);
-    //     bst.add(30);
+        bst.add(10);
+        bst.add(20);
+        bst.add(30);
 
-    //     Node n = bst.firstUnBalanced();
+        Node n = bst.firstUnBalanced();
 
-    //     assert bst.isRightPending(n);
+        assert bst.isRightPending(n);
 
-    //     bst = new BST();
+        bst = new BST();
 
-    //     bst.add(10);
-    //     bst.add(30);
-    //     bst.add(20);
+        bst.add(10);
+        bst.add(30);
+        bst.add(20);
 
-    //     n = bst.firstUnBalanced();
+        n = bst.firstUnBalanced();
 
-    //     assert bst.isRightPending(n);
+        assert !bst.isLeftPending(n);
+        assert bst.isRightPending(n);
 
-    // }
+    }
 
 }
  

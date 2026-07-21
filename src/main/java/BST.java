@@ -47,7 +47,7 @@ public class BST {
 
     private int balance(Node node) {
 
-        return height(node.left) - height(node.right);
+        return Math.abs(height(node.left) - height(node.right));
     }
 
     //conta nós desbalanceados 
@@ -98,22 +98,35 @@ public class BST {
     }
 
     //IMPLEMENTAR 
-    public boolean isRightPeding(){
-        return false;
+    public boolean isRightPending(Node node){
+
+        return isRightPendingAux(this.root);
+        
+    }
+
+    private boolean isRightPendingAux(Node node){
+        
+        if(node == null) return false;
+
+        if (height(node.right) < height(node.left)) return true;
+ 
+        return isRightPendingAux(node.right) && isRightPendingAux(node.left);
     }
 
     //IMPLEMENTAR
-    public boolean isLeftPeding(){
-        return false;
-        if (balace > );
+    public boolean isLeftPending(Node node){
+        
+        return isLeftPendingAux(this.root);
+        
     }
 
-    private boolean isLeftPeding(Node node){
+    private boolean isLeftPendingAux(Node node){
 
-        return balance(node) > 0;
+        if (node == null) return false;
 
-        Node re
-        return isLeftPeding(node.right) && isLeftPeding(node.left);
+        if (height(node.right) > height(node.left)) return true;
+ 
+        return isLeftPendingAux(node.right) && isLeftPendingAux(node.left);
     }
 
 
