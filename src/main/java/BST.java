@@ -106,13 +106,55 @@ public class BST {
         return "";
     }
 
+    //Métodos auxiliares para rotação
+
+    public void rotateRigth(Node node) {
+        //cria uma nova raiz 
+        Node newRoot = node.left;
+        newRoot.parent = node;
+
+        node.left = newRoot.right;
+        newRoot.right =  node;
+
+        node.parent = newRoot;
+        //verifica se é uma 
+        if (newRoot.parent != null){
+            if (newRoot.parent.left == node){
+                newRoot.parent.right = newRoot;
+            }
+        } else {
+            newRoot.parent.right = newRoot;
+        } 
+        this.root = newRoot;
+        //verifica se é vazio o pai dele
+    }
+
+    public void rotateLeft(Node node){
+
+        Node newRoot = node.right;
+        newRoot.parent = node;
+
+        node.right =  newRoot.left;
+        newRoot.left = node;
+
+        node.parent = newRoot;
+
+        if (newRoot.parent != null){
+            if (newRoot.parent.right == node){
+                newRoot.parent.left = newRoot;
+            }
+        } else {
+            newRoot.parent.left = newRoot;
+        }
+
+        this.root = newRoot;
+
+    }
+
     public int balanceCheck(Node node){
 
         return height(node.left) - height(node.right);
     }
-
-
-
 
     /**
      * TEST ROTATION NEEDED 
