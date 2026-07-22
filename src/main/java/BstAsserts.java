@@ -410,6 +410,8 @@ public class BstAsserts {
 
         BST bst = new BST();
 
+        assert !bst.isLeftPending(null);
+        
         bst.add(30);
         bst.add(20);
         bst.add(10);

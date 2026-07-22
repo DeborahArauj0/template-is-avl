@@ -89,8 +89,40 @@ public class BST {
     //IMPLEMENTAR
     public String testRotationNeeded(Node node){
 
+        if (node == null) return "";
+
+        //LL
+        if (balanceCheck(node) > 1){
+            
+            //LR
+            if (balanceCheck(node.left) <= 0){
+                //RR em node.left e depos LL 
+            }
+            //Rotações direta sem precisar
+            
+        }
+
+        //RR 
         return "";
     }
+
+    public int balanceCheck(Node node){
+
+        return height(node.left) - height(node.right);
+    }
+
+
+
+
+    /**
+     * TEST ROTATION NEEDED 
+     * 
+     * caso balance >= 1 : 
+     *      balance >= -1 :
+     * 
+     * 
+     * @return
+     */
 
     //IMPLEMENTAR
     public boolean checkDesbalanced(){
@@ -108,7 +140,7 @@ public class BST {
         
         if(node == null) return false;
 
-        if (height(node.right) < height(node.left)) return true;
+        if (height(node.right) > height(node.left)) return true;
  
         return isRightPendingAux(node.right) && isRightPendingAux(node.left);
     }
@@ -124,7 +156,7 @@ public class BST {
 
         if (node == null) return false;
 
-        if (height(node.right) > height(node.left)) return true;
+        if (height(node.left) > height(node.right)) return true;
  
         return isLeftPendingAux(node.right) && isLeftPendingAux(node.left);
     }
